@@ -49,7 +49,12 @@ AWS Services, Palo Alto VM series
 <img src="https://github.com/user-attachments/assets/5fcc6438-e039-4c31-a48f-c39d42b6b2e5"/>
 <br/> Add the following route to the public route table to be able to access the internet <br/>
 <img src="https://github.com/user-attachments/assets/6034dabe-1802-404a-9c2a-6c19e318e34b"/>
-
+<br/> Next add the subnets to the public route table <br/>
+<img src="https://github.com/user-attachments/assets/a95b6fda-5c27-40c4-9fdd-b7ba0c413072"/>
+<br/> Now the firewall will be able to control the data traffic between the virtual machines and the internet through the interface <br/>
+<br/> Next lets associate the private subnet witht the private route table <br/>
+<img src="https://github.com/user-attachments/assets/90d35746-118e-4be6-9337-e4ef3560eca0"/>
+<br/> Now we have all of our VPC requirements ready next we can move onto EC2 <br/>
 
 ## Step : 
 <br/> <br/>
