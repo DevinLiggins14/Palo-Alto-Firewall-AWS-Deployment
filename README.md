@@ -8,11 +8,11 @@
 
 <h2>Languages and Utilities Used</h2>
 
-AWS Services, Palo Alto VM series
+AWS Resources, Palo Alto VM series
 
 <h2>Environments Used </h2>
 
-- <b>EC2, PAYG </b>
+- <b> AWS </b>
 
 <h2>Project walk-through:</h2>
 <br/>
@@ -70,23 +70,50 @@ AWS Services, Palo Alto VM series
 <br/> Now we can finally connect to our EC2 instance. Any error messages that appear after connect is pressed mean that its possible the route table does not have an IP so retrace the first steps. Now click on connect  <br/>
 
 
-## Step 5: Connect to the Palo Alto instance
+## Step 5: Configure the password
 <br/> Use an ssh client and enter the public IP, the private key, and the username as "admin" (Note: for this demo I am using MobaxTerm for the ssh client) <br/>
 <img src="https://github.com/user-attachments/assets/adfabb8d-71c6-49c6-a6f9-e786d3cf805e"/>
+<br/> Now let's configure the admin password <br/>
+
+```Bash
+# Enter configuration mode
+configure
+# Change admin password
+set mgt-config users admin password
+# Save configuration
+commit
+```
+
+<img src="https://github.com/user-attachments/assets/996099b5-e6f3-4399-bd52-1718fdeafae6"/>
+
+
+
+## Step 6: Connect to the management console
+<br/> Now enter https://the-public-ip of the management subnet into a browser and login <br/>
+<img src="https://github.com/user-attachments/assets/2de19887-441c-4ebf-bb12-d4b4336a91cc"/>
+<br/> If there is a "warning connection is not private message" click advanced and proceed <br/>
+<img src="https://github.com/user-attachments/assets/ccec5c3d-89a1-4b04-9eb0-9f424e76fb28"/>
+<img src="https://github.com/user-attachments/assets/980ba748-9ae1-4012-acd8-789ec56dc155"/>
+<br/> The management IP address is visible and it matches the one in AWS <br/>
+<img src="https://github.com/user-attachments/assets/79ad2e89-3011-4ca2-a18d-d7f2eccdd7c9"/>
+
+
+## Step 7: Create additional interfaces
+<br/> Navigate back to AWS and rename the management interface <br/>
+<img src="https://github.com/user-attachments/assets/790bf5d2-4b48-42d1-b456-f019be7ff35e"/>
+<br/> Now we will create addition interfaces to attach to the virtual machine. Assign each interface to the related subnet and recommended security group. <br/>
+<img src="https://github.com/user-attachments/assets/702b7185-5ca0-4691-b17f-c41241bde04d"/>
+<br/> Rename <br/>
+<img src="https://github.com/user-attachments/assets/6dc8d782-e1c8-45ed-a7cf-e0ee3591a0a0"/>
+<br/> Each network interface must be attached to the Palo Alto firewall. To do this click actions, attach, then select the subnet and Palo Alto instance. <br/>
+<img src="https://github.com/user-attachments/assets/f878a9e7-d7d1-4bef-995a-5f2f9ef55bba"/>
+<br/> The next step is to disable the source/destination check. This is just a security check put in place by AWS to make sure only certain traffic is hitting an interface by making sure the ip address of the interface itself is either the source ip or the destination ip in the packet. This is important to disable because if a packet hit the firewall with a source ip and destination ip that do not match then it will be blocked automatically. Source destination checks should almost always be disabled when deploying firewalls in AWS for this reason. <br/>
+<br/> Click actions, choose source/dest check, and uncheck the box <br/>
+<img src="https://github.com/user-attachments/assets/cc110205-fe33-4023-9e6c-6b0921c733c7"/>
+<br/>  <br/>
 <img src=""/>
 
-
-## Step :
-<br/> <br/>
-<img src=""/>
-
-
-## Step : 
-<br/> <br/>
-<img src=""/>
-
-
-## Step :
+## Step 8:
 <br/> <br/>
 <img src=""/>
 
