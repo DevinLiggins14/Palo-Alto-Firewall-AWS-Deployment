@@ -101,7 +101,7 @@ commit
 ## Step 7: Create additional interfaces
 <br/> Navigate back to AWS and rename the management interface <br/>
 <img src="https://github.com/user-attachments/assets/790bf5d2-4b48-42d1-b456-f019be7ff35e"/>
-<br/> Now we will create addition interfaces to attach to the virtual machine. Assign each interface to the related subnet and recommended security group. <br/>
+<br/> Now we will create additional interfaces to attach to the virtual machine. Assign each interface to the related subnet and recommended security group. <br/>
 <img src="https://github.com/user-attachments/assets/702b7185-5ca0-4691-b17f-c41241bde04d"/>
 <br/> Rename <br/>
 <img src="https://github.com/user-attachments/assets/6dc8d782-e1c8-45ed-a7cf-e0ee3591a0a0"/>
@@ -110,10 +110,26 @@ commit
 <br/> The next step is to disable the source/destination check. This is just a security check put in place by AWS to make sure only certain traffic is hitting an interface by making sure the ip address of the interface itself is either the source ip or the destination ip in the packet. This is important to disable because if a packet hit the firewall with a source ip and destination ip that do not match then it will be blocked automatically. Source destination checks should almost always be disabled when deploying firewalls in AWS for this reason. <br/>
 <br/> Click actions, choose source/dest check, and uncheck the box <br/>
 <img src="https://github.com/user-attachments/assets/cc110205-fe33-4023-9e6c-6b0921c733c7"/>
-<br/>  <br/>
-<img src=""/>
+<br/> Next create the third interface following the steps above <br/>
+<img src="https://github.com/user-attachments/assets/1bbf8763-915e-402e-9c74-1e121d3a5095"/>
 
-## Step 8:
-<br/> <br/>
-<img src=""/>
+## Step 8: Add the interfaces to Palo Alto 
+<br/> Navigate back to the Palo Alto console and go to Network. Click on ethernet 1/1 and change the interface type to layer 3 to allow routing and IP addresses to be assigned to that interface. (Note: ethernet 0 is not currently visible but it is actually the management interface <br/>
+<br/> Also change from static to DHCP client so the interface can recieve IP addresses from AWS <br/>
+<img src="https://github.com/user-attachments/assets/16de3f23-c71b-456b-bff2-156c065745c1"/>
+<br/> Change the virtual router to default and create a public security zone <br/>
+<img src="https://github.com/user-attachments/assets/83469bfe-3c2e-4e7c-9e82-cd8504e0de8f"/>
+<br/> Repeat the process to create the private interface except this time disable create default route <br/>
+<img src="https://github.com/user-attachments/assets/9ea6f05b-0414-4570-8e4d-8d42bb8fbf89"/>
+<img src="https://github.com/user-attachments/assets/728bdf0c-232b-4715-8621-ad8ef3fe531d"/>
+<br/> Now commit to save the configuration changes <br/>
+<img src="https://github.com/user-attachments/assets/c44ed09f-a4db-4ad5-b261-8a8dd0f685fb"/>
+<br/> Select preview changes to view cli changes to verify and then commit <br/>
+<img src="https://github.com/user-attachments/assets/0537d8f4-169e-4a4e-8493-b26c1d02dec9"/>
+<img src="https://github.com/user-attachments/assets/b7ee4ef7-6151-41ee-b446-5e96b1aafe1b"/>
+<br/> The last step to use the firewall to protect the private network is to return to AWS and add a default route to the private interface of the palo alto firewall. This way if any device on the network wants to talk outside of the subnet will need to go through the firewall to be able to talk to it <br/>
+<img src="https://github.com/user-attachments/assets/700b9499-9451-4783-b2b5-88098d37db8b"/>
+<br/> That is how you configure and deploy Palo Alto firewall on EC2  <br/>
+
+
 
