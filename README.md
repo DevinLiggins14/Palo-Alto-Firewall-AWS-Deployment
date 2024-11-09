@@ -49,6 +49,9 @@ AWS Services, Palo Alto VM series
 <img src="https://github.com/user-attachments/assets/5fcc6438-e039-4c31-a48f-c39d42b6b2e5"/>
 <br/> Add the following route to the public route table to be able to access the internet <br/>
 <img src="https://github.com/user-attachments/assets/6034dabe-1802-404a-9c2a-6c19e318e34b"/>
+<br/> Note: for this you will need an Elastic IP and an internet gateway <br/>
+<img src="https://github.com/user-attachments/assets/513a7a74-dc41-49a2-a19a-0a7cb8ec0a25"/>
+<img src="https://github.com/user-attachments/assets/b213d6e8-72f6-458d-a29d-81acb63eb20e"/>
 <br/> Next add the subnets to the public route table <br/>
 <img src="https://github.com/user-attachments/assets/a95b6fda-5c27-40c4-9fdd-b7ba0c413072"/>
 <br/> Now the firewall will be able to control the data traffic between the virtual machines and the internet through the interface <br/>
@@ -56,13 +59,20 @@ AWS Services, Palo Alto VM series
 <img src="https://github.com/user-attachments/assets/90d35746-118e-4be6-9337-e4ef3560eca0"/>
 <br/> Now we have all of our VPC requirements ready next we can move onto EC2 <br/>
 
-## Step : 
-<br/> <br/>
-<img src=""/>
+## Step 4: Lanuch the Palo Alto EC2 instance 
+<br/> Navigate to the EC2 resource and go to launch an instance with the Palo Alto VM series AMI <br/>
+<img src="https://github.com/user-attachments/assets/4a75a777-2e49-4023-b6ba-15ae2bae5289"/>
+<img src="https://github.com/user-attachments/assets/24f8e259-298e-4d74-bbe3-17551691b9c1"/>
+<br/> Next configure the instance size, keypair, subnet, IP, and VPC. Make sure to select the management subnet to follow the documentation order to create the instance. <br/>
+<img src="https://github.com/user-attachments/assets/7052d47e-642f-4c0b-9ef7-38c1244022c8"/>
+<br/> leave the following for demo purposes <br/>
+<img src="https://github.com/user-attachments/assets/d4a34a42-9532-4835-bb9f-983d4283dda4"/>
+<br/> Now we can finally connect to our EC2 instance. Any error messages that appear after connect is pressed mean that its possible the route table does not have an IP so retrace the first steps. Now click on connect  <br/>
 
 
-## Step : 
-<br/> <br/>
+## Step 5: Connect to the Palo Alto instance
+<br/> Use an ssh client and enter the public IP, the private key, and the username as "admin" (Note: for this demo I am using MobaxTerm for the ssh client) <br/>
+<img src="https://github.com/user-attachments/assets/adfabb8d-71c6-49c6-a6f9-e786d3cf805e"/>
 <img src=""/>
 
 
